@@ -1,0 +1,108 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import WorkRow from '@/components/WorkRow.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import { SITE, NAV_LINKS } from '@/site.config';
+
+const allWork = await getCollection('work', ({ data }) => !data.draft);
+const sorted = [...allWork].sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const featured = sorted.filter((entry) => entry.data.featured);
+const rest = sorted.filter((entry) => !entry.data.featured);
+const selected = [...featured, ...rest].slice(0, 5);
+---
+
+<BaseLayout title={SITE.name}>
+  <section class="mx-auto max-w-page px-6 pt-24 pb-28 sm:pt-32 sm:pb-36">
+    <div class="flex flex-col gap-10 md:flex-row md:items-start md:justify-between md:gap-16">
+      <div class="min-w-0 flex-1">
+        <h1 class="text-ink max-w-3xl text-[2.4rem] leading-[1.18] font-medium tracking-tight sm:text-[3.1rem]">
+          {SITE.intro}
+        </h1>
+
+        <div class="text-ink-soft mt-8 max-w-measure space-y-5 leading-relaxed">
+          {SITE.lead.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+
+        <nav class="mt-12 flex flex-wrap items-baseline gap-x-5 gap-y-2" aria-label="Site">
+          {
+            NAV_LINKS.map((link) => (
+              <a href={link.href} class="text-ink-soft hover:text-ink font-mono text-xs transition-colors">
+                {link.label.toLowerCase()}
+              </a>
+            ))
+          }
+        </nav>
+
+        <nav class="mt-4 flex flex-wrap items-baseline gap-x-5 gap-y-2" aria-label="Elsewhere">
+          {
+            SITE.social.map((link) => (
+              <a
+                href={link.href}
+                class="text-ink-soft hover:text-ink font-mono text-xs transition-colors"
+                rel="me"
+              >
+                {link.label.toLowerCase()}
+              </a>
+            ))
+          }
+          <a
+            href={`mailto:${SITE.email}`}
+            class="text-ink-soft hover:text-ink font-mono text-xs transition-colors"
+          >
+            email
+          </a>
+        </nav>
+      </div>
+
+      <img
+        src="/images/profile.jpg"
+        alt={SITE.name}
+        width="280"
+        height="280"
+        class="aspect-square w-56 shrink-0 rounded-[10px] object-cover shadow-[0_1px_4px_rgba(26,28,31,0.08)] md:w-[17.5rem] dark:shadow-[0_1px_6px_rgba(0,0,0,0.4)]"
+      />
+    </div>
+  </section>
+
+  <section id="work" class="mx-auto max-w-page px-6 pb-28 sm:pb-32">
+    <SectionHeading eyebrow="Selected work" count={allWork.length} />
+    <div>
+      {selected.map((entry) => <WorkRow entry={entry} />)}
+    </div>
+    {
+      allWork.length > selected.length && (
+        <div class="mt-8">
+          <a
+            href="/work"
+            class="text-ink-soft hover:text-signal font-mono text-xs transition-colors"
+          >
+            View all {allWork.length} projects →
+          </a>
+        </div>
+      )
+    }
+  </section>
+
+  <section id="contact" class="mx-auto max-w-page px-6 pb-32 sm:pb-36">
+    <SectionHeading eyebrow="Contact" />
+    <p class="text-ink-soft max-w-measure leading-relaxed">
+      {SITE.contactNote}
+    </p>
+    <a
+      href={`mailto:${SITE.email}`}
+      class="text-signal mt-6 inline-flex items-center gap-2 font-mono text-[0.95rem] hover:underline"
+    >
+      {SITE.email}
+    </a>
+    <nav class="mt-5 flex flex-wrap items-baseline gap-x-5 gap-y-2" aria-label="Social">
+      {
+        SITE.social.map((link) => (
+          <a href={link.href} class="text-ink-soft hover:text-signal font-mono text-xs transition-colors" rel="me">
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+  </section>
+</BaseLayout>

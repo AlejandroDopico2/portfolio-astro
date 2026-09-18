@@ -1,0 +1,31 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const entry = await getEntry('about', 'about');
+if (!entry) {
+  throw new Error('Missing About content: src/content/about/about.md');
+}
+
+const { Content } = await render(entry);
+const { title, description } = entry.data;
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="mx-auto max-w-page px-6 pt-16 pb-24 sm:pt-24">
+    <p class="text-ink-soft mb-6 font-mono text-xs tracking-[0.2em] uppercase">About</p>
+
+    <div class="about-prose prose prose-sm sm:prose-base max-w-measure">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .about-prose :global(h1) {
+    font-family: var(--font-display);
+    font-weight: 500;
+    max-width: 36rem;
+    margin-top: 0;
+  }
+</style>

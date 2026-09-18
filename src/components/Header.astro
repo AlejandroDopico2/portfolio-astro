@@ -1,0 +1,41 @@
+---
+import ThemeToggle from '@/components/ThemeToggle.astro';
+import { SITE, NAV_LINKS } from '@/site.config';
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="border-line bg-paper sticky top-0 z-40 border-b">
+  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-6 py-5">
+    <a href="/" class="text-ink text-[1.05rem] font-medium tracking-tight">
+      {SITE.name}
+    </a>
+
+    <nav class="flex items-center gap-6" aria-label="Primary">
+      {
+        NAV_LINKS.map((link) => {
+          const isActive = currentPath === link.href || currentPath.startsWith(`${link.href}/`);
+          return (
+            <a
+              href={link.href}
+              aria-current={isActive ? 'page' : undefined}
+              class:list={[
+                'font-mono text-xs tracking-wide uppercase transition-colors',
+                isActive ? 'text-signal' : 'text-ink-soft hover:text-ink',
+              ]}
+            >
+              {link.label}
+            </a>
+          );
+        })
+      }
+      <a
+        href="/#contact"
+        class="text-ink-soft hover:text-ink hidden font-mono text-xs tracking-wide uppercase transition-colors sm:inline"
+      >
+        Contact
+      </a>
+      <ThemeToggle />
+    </nav>
+  </div>
+</header>

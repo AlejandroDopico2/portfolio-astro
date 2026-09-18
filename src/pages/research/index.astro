@@ -1,0 +1,113 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PaperItem from '@/components/PaperItem.astro';
+import { SITE } from '@/site.config';
+
+const papers = (await getCollection('research', ({ data }) => !data.draft)).sort((a, b) => {
+  if (b.data.year !== a.data.year) return b.data.year - a.data.year;
+  if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
+  return a.data.title.localeCompare(b.data.title);
+});
+
+const years = [...new Set(papers.map((paper) => paper.data.year))];
+
+const typeOrder = ['journal', 'conference', 'workshop', 'preprint'] as const;
+const presentTypes = typeOrder.filter((type) => papers.some((paper) => paper.data.type === type));
+
+const typeLabels: Record<(typeof typeOrder)[number], string> = {
+  journal: 'Journals',
+  conference: 'Conferences',
+  workshop: 'Workshops',
+  preprint: 'Preprints',
+};
+---
+
+<BaseLayout
+  title="Research"
+  description={`Publications and preprints by ${SITE.name}.`}
+>
+  <section class="mx-auto max-w-page px-6 pt-16 pb-24 sm:pt-24">
+    <p class="text-ink-soft mb-6 font-mono text-xs tracking-[0.2em] uppercase">Research</p>
+    <h1 class="text-ink max-w-xl text-3xl font-medium tracking-tight sm:text-4xl">Publications</h1>
+    <p class="text-ink-soft mt-6 max-w-measure leading-relaxed">
+      Papers and preprints. Abstracts expand in place.
+    </p>
+
+    <div
+      class="mt-10 flex flex-wrap items-baseline gap-x-5 gap-y-2 font-mono text-xs"
+      role="group"
+      aria-label="Filter publications"
+      data-pub-filters
+    >
+      <button
+        type="button"
+        data-filter="all"
+        aria-pressed="true"
+        class="text-ink"
+      >
+        All
+      </button>
+      {
+        presentTypes.map((type) => (
+          <button type="button" data-filter={type} aria-pressed="false" class="text-ink-soft hover:text-ink">
+            {typeLabels[type]}
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="mt-12">
+      {
+        years.map((year) => (
+          <section class="mb-6" data-year-group>
+            <h2 class="text-ink-soft font-mono text-[0.8125rem] tracking-[0.18em] uppercase">
+              {year}
+            </h2>
+            <div>
+              {papers
+                .filter((paper) => paper.data.year === year)
+                .map((paper) => (
+                  <PaperItem entry={paper} />
+                ))}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  function initPublicationFilter() {
+    const root = document.querySelector<HTMLElement>('[data-pub-filters]');
+    if (!root || root.dataset.bound) return;
+    root.dataset.bound = 'true';
+
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+
+    function apply(type: string) {
+      document.querySelectorAll<HTMLElement>('[data-paper]').forEach((paper) => {
+        paper.hidden = type !== 'all' && paper.dataset.type !== type;
+      });
+      document.querySelectorAll<HTMLElement>('[data-year-group]').forEach((group) => {
+        const visible = [...group.querySelectorAll<HTMLElement>('[data-paper]')].some(
+          (paper) => !paper.hidden,
+        );
+        group.hidden = !visible;
+      });
+      buttons.forEach((button) => {
+        const active = button.dataset.filter === type;
+        button.setAttribute('aria-pressed', String(active));
+        button.classList.toggle('text-ink', active);
+        button.classList.toggle('text-ink-soft', !active);
+      });
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => apply(button.dataset.filter ?? 'all'));
+    });
+  }
+
+  document.addEventListener('astro:page-load', initPublicationFilter);
+</script>
