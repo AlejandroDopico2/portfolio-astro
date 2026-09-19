@@ -1,25 +1,16 @@
 {
-  "name": "portfolio-starter",
+  "name": "dopico-dev",
   "type": "module",
   "version": "1.0.0",
-  "private": false,
-  "description": "A minimal, professional portfolio starter for Astro — TypeScript, Tailwind CSS v4, Content Collections, dark mode, and full SEO, with no unnecessary dependencies.",
-  "keywords": [
-    "astro",
-    "astro-theme",
-    "astro-template",
-    "portfolio",
-    "tailwindcss",
-    "typescript",
-    "starter"
-  ],
+  "private": true,
+  "description": "Personal site of Alejandro Dopico — computer engineer and PhD researcher in AI.",
   "license": "MIT",
-  "author": "Bracozs",
+  "author": "Alejandro Dopico",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/portfolio-starter"
+    "url": "https://github.com/AlejandroDopico2/portfolio-astro"
   },
-  "homepage": "https://github.com/your-username/portfolio-starter",
+  "homepage": "https://dopico.dev",
   "engines": {
     "node": ">=22.0.0"
   },

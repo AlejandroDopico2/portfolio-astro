@@ -12,7 +12,7 @@ something that looks intentional on day one, without a component library you did
 <br />
 
 <div align="center">
-  <img src="./public/og-image.png" alt="Portfolio Starter preview" width="100%" style="max-width: 720px; border-radius: 8px;" />
+  <img src="./public/og.png" alt="Alejandro Dopico" width="100%" style="max-width: 720px; border-radius: 8px;" />
 </div>
 
 <br />
@@ -60,7 +60,7 @@ Open `http://localhost:4321`.
 ├── public/
 │   ├── favicon.svg
 │   ├── favicons/
-│   ├── og-image.png          # replace with your own 1200×630 image
+│   ├── og.png                # Open Graph image (1200×630)
 │   └── robots.txt
 ├── src/
 │   ├── assets/               # static images and assets
@@ -114,7 +114,7 @@ featured: true # optional, shows it first on the homepage
 Full write-up in Markdown.
 ```
 
-**Open Graph image.** Replace `public/og-image.png` with your own 1200×630 image.
+**Open Graph image.** `public/og.png` is the 1200×630 preview used by WhatsApp, X, and LinkedIn.
 
 ## Deploying
 
