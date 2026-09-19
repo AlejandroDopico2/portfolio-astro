@@ -1,0 +1,45 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('notes', ({ data }) => !data.draft);
+  return entries.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'notes'>;
+}
+
+const { entry } = Astro.props;
+const { title, description, date } = entry.data;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={title} description={description ?? title}>
+  <article class="mx-auto max-w-page px-6 pt-16 pb-24 sm:pt-24">
+    <a href="/notes" class="text-ink-soft hover:text-signal font-mono text-xs transition-colors">
+      ← Notes
+    </a>
+
+    <header class="max-w-measure mt-8">
+      <h1 class="text-ink text-3xl leading-tight font-medium tracking-tight sm:text-4xl">
+        {title}
+      </h1>
+      <time datetime={date.toISOString()} class="text-ink-soft mt-3 block font-mono text-xs">
+        {date.toLocaleDateString('en-GB', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        })}
+      </time>
+    </header>
+
+    <div class="prose prose-sm sm:prose-base max-w-measure mt-10">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

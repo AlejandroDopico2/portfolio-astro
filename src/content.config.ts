@@ -72,4 +72,15 @@ const research = defineCollection({
   }),
 });
 
-export const collections = { work, about, research };
+// Notes and posts. One Markdown file per entry at /notes/<id>.
+const notes = defineCollection({
+  loader: glob({ base: './src/content/notes', pattern: '**/*.md' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    date: z.coerce.date(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { work, about, research, notes };

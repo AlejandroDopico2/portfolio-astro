@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const notes = (await getCollection('notes', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<BaseLayout title="Notes" description="Notes, posts, and other writing.">
+  <section class="mx-auto max-w-page px-6 pt-16 pb-24 sm:pt-24">
+    <p class="text-ink-soft mb-6 font-mono text-xs tracking-[0.2em] uppercase">Notes</p>
+    <h1 class="text-ink max-w-xl text-3xl font-medium tracking-tight sm:text-4xl">Notes</h1>
+
+    {
+      notes.length === 0 ? (
+        <p class="text-ink-soft mt-6 max-w-measure leading-relaxed">
+          Still working on this. Notes, posts, and other writing will show up here.
+        </p>
+      ) : (
+        <div class="mt-12">
+          {notes.map((note) => (
+            <a
+              href={`/notes/${note.id}`}
+              class="group border-line grid grid-cols-[6.5rem_1fr] items-baseline gap-4 border-b py-6 sm:grid-cols-[8rem_1fr]"
+            >
+              <time
+                datetime={note.data.date.toISOString()}
+                class="text-ink-soft font-mono text-xs"
+              >
+                {note.data.date.toLocaleDateString('en-GB', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                })}
+              </time>
+              <span class="text-ink group-hover:text-signal text-[1.05rem] font-medium tracking-tight transition-colors">
+                {note.data.title}
+              </span>
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </section>
+</BaseLayout>
