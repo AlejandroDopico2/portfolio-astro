@@ -1,22 +1,29 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import WorkRow from '@/components/WorkRow.astro';
-import SectionHeading from '@/components/SectionHeading.astro';
+import WorkEntry from '@/components/WorkEntry.astro';
+import { SITE } from '@/site.config';
 
-const allWork = (await getCollection('work', ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
+const allWork = (await getCollection('work', ({ data }) => !data.draft)).sort((a, b) => {
+  if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
+  return b.data.date.valueOf() - a.data.date.valueOf();
+});
 ---
 
-<BaseLayout
-  title="Work"
-  description="Selected projects in product design and frontend engineering."
->
-  <section class="mx-auto max-w-page px-6 pt-16 pb-24 sm:pt-24">
-    <SectionHeading eyebrow="All work" count={allWork.length} />
-    <div>
-      {allWork.map((entry) => <WorkRow entry={entry} />)}
+<BaseLayout title="Projects" description={`Selected projects by ${SITE.name}.`}>
+  <section class="max-w-page mx-auto px-6 pt-16 pb-24 sm:pt-24">
+    <p class="text-ink-soft mb-6 font-mono text-xs tracking-[0.2em] uppercase">Work</p>
+    <h1 class="text-ink max-w-xl text-3xl font-medium tracking-tight sm:text-4xl">Projects</h1>
+    <p class="text-ink-soft max-w-measure mt-6 leading-relaxed">
+      Selected work from hackathons and software.
+    </p>
+
+    <div class="mt-16 flex flex-col gap-16 sm:mt-20 sm:gap-20 lg:gap-24">
+      {
+        allWork.map((entry, index) => (
+          <WorkEntry entry={entry} reverse={index % 2 === 1} priority={index === 0} />
+        ))
+      }
     </div>
   </section>
 </BaseLayout>

@@ -3,23 +3,41 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 // "work" entries live in src/content/work/*.md
-// Each file's `id` is derived from its filename, e.g. studio-os.md -> "studio-os",
-// which becomes the URL at /work/studio-os.
+// Each file's `id` is derived from its filename, e.g. artlens.md -> "artlens",
+// which becomes the URL at /work/artlens.
 const work = defineCollection({
   loader: glob({ base: './src/content/work', pattern: '**/*.md' }),
-  schema: ({ image }) =>
-    z.object({
+  schema: ({ image }) => {
+    const figure = z.object({
+      src: image(),
+      alt: z.string(),
+      caption: z.string().optional(),
+    });
+
+    return z.object({
       title: z.string(),
-      summary: z.string().max(160),
-      role: z.string(),
+      subtitle: z.string().optional(),
+      description: z.string().optional(),
+      year: z.number().int(),
+      category: z.string().optional(),
+      event: z.string().optional(),
+      award: z.string().optional(),
+      // Sort key for the homepage selected-work list and the /work index.
       date: z.coerce.date(),
-      tags: z.array(z.string()).default([]),
-      cover: image().optional(),
-      url: z.url().optional(),
-      repo: z.url().optional(),
+      heroImage: figure.optional(),
+      gallery: z.array(figure).default([]),
+      links: z
+        .array(
+          z.object({
+            label: z.string(),
+            href: z.url(),
+          }),
+        )
+        .default([]),
       featured: z.boolean().default(false),
       draft: z.boolean().default(false),
-    }),
+    });
+  },
 });
 
 // About page copy. Body lives in Markdown; frontmatter is metadata

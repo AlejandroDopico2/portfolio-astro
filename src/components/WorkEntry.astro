@@ -1,0 +1,60 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import WorkFigure from '@/components/WorkFigure.astro';
+
+interface Props {
+  entry: CollectionEntry<'work'>;
+  reverse?: boolean;
+  priority?: boolean;
+}
+
+const { entry, reverse = false, priority = false } = Astro.props;
+const { title, subtitle, description, year, category, event, award, heroImage } = entry.data;
+const meta = subtitle ?? [year, event, award].filter(Boolean).join(' · ');
+const tags = [category, event, String(year)].filter(
+  (tag): tag is string => typeof tag === 'string' && tag.length > 0 && !meta.includes(tag),
+);
+---
+
+<a
+  href={`/work/${entry.id}`}
+  class:list={[
+    'group flex flex-col gap-8 md:flex-row md:items-center md:gap-12 lg:gap-16',
+    reverse && 'md:flex-row-reverse',
+  ]}
+>
+  <div class="min-w-0 flex-1">
+    <h2
+      class="text-ink group-hover:text-signal text-[1.5rem] leading-tight font-medium tracking-tight transition-colors sm:text-[1.65rem]"
+    >
+      {title}
+    </h2>
+    <p class="text-ink-soft mt-2 font-mono text-xs">{meta}</p>
+    {
+      description && (
+        <p class="text-ink-soft mt-3 max-w-md text-[0.95rem] leading-relaxed">{description}</p>
+      )
+    }
+    {
+      tags.length > 0 && (
+        <ul class="text-ink-soft mt-5 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[11px]">
+          {tags.map((tag) => (
+            <li>{tag}</li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+
+  {
+    heroImage && (
+      <WorkFigure
+        src={heroImage.src}
+        alt={heroImage.alt}
+        priority={priority}
+        sizes="(min-width: 48rem) 22rem, calc(100vw - 3rem)"
+        class="w-full shrink-0 md:w-[20rem] lg:w-[22.5rem]"
+      />
+    )
+  }
+</a>
