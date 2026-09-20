@@ -1,0 +1,143 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.6/schema.json
+cv:
+  name: Alejandro Dopico-Castro
+  headline: PhD Researcher in Frugal AI | Continuous & Federated Learning
+  location: A Coruña, Spain
+  email: hello@dopico.dev
+  photo:
+  phone:
+  website: https://dopico.dev/
+  social_networks:
+    - network: LinkedIn
+      username: AlejandroDopicoCastro
+    - network: GitHub
+      username: AlejandroDopico2
+  custom_connections:
+  sections:
+    education:
+      - institution: University of A Coruña (UDC)
+        area: Computer Science
+        degree: PhD
+        date:
+        start_date: 2025-03
+        end_date: present
+        summary: 'Funded PhD on Frugal and Sustainable AI (continual, federated, few-shot learning).'
+      - institution: University of A Coruña (MIA-UDC)
+        area: Artificial Intelligence
+        degree: MSc
+        start_date: 2023-09
+        end_date: 2025-02
+        highlights:
+          - 'Thesis: Efficient Single-Step Framework for Incremental Class Learning'
+      - institution: University of A Coruña
+        area: Computer Science
+        degree: BSc
+        start_date: 2019-09
+        end_date: 2023-06
+        highlights:
+          - 'Thesis: Object detection for sports images'
+    experience:
+      - company: LIDIA Group, University of A Coruña
+        position: PhD Researcher
+        date:
+        start_date: 2025-03
+        end_date: present
+        location: A Coruña, Spain
+        summary:
+        highlights:
+          - Research on frugal AI methods (continual, federated, few-shot learning) for resource-constrained systems.
+          - Development of adaptive learning modules within the EU PILLAR-Robots project.
+      - company: INESC TEC, University of Porto
+        position: Research Stay (Visiting Researcher)
+        date:
+        start_date: 2026-03
+        end_date: 2026-05
+        location: Porto, Portugal
+        summary:
+        highlights:
+          - Research stay with João Gama (University of Porto) and Pedro Henriques Abreu (University of Coimbra).
+          - Collaboration on deep learning and continual learning for resource-efficient settings.
+      - company: LIDIA Group, University of A Coruña
+        position: Research Support Technician (MSc Internship)
+        date:
+        start_date: 2024-01
+        end_date: 2025-02
+        location: A Coruña, Spain
+        summary:
+        highlights:
+          - Developed class-incremental learning models for dynamic environments within the PILLAR-Robots project.
+          - Work evolved into current PhD research on Frugal AI.
+      - company: Cinfo Company
+        position: AI Software Developer
+        date:
+        start_date: 2022-10
+        end_date: 2023-06
+        location: A Coruña, Spain
+        summary:
+        highlights:
+          - Designed and optimized deep learning models (YOLO, SSD) for automated sports production.
+          - Integrated C++ real-time inference with Python-based training pipelines.
+    publications:
+      - title: 'FedHENet: A Frugal Federated Learning Framework for Heterogeneous Environments'
+        authors:
+          - Alejandro Dopico-Castro
+          - Oscar Fontenla-Romero
+          - Bertha Guijarro-Berdiñas
+          - Amparo Alonso-Betanzos
+          - Iván Pérez Digón
+        summary: Single-round, hyperparameter-free federated image classification with homomorphic encryption.
+        date: 2026
+        journal: ESANN
+        url: https://arxiv.org/abs/2602.13024
+      - title: Closing the Alignment-Maturity Gap in Federated Prototype Learning
+        authors:
+          - Mario Casado-Diez
+          - Alejandro Dopico-Castro
+          - Verónica Bolón-Canedo
+          - Bertha Guijarro-Berdiñas
+        summary: Scheduled alignment and geometry-driven separation for federated prototype learning under heterogeneity.
+        date: 2026
+        journal: arXiv
+        url: https://arxiv.org/abs/2606.02172
+      - title: 'CIFNet: An Analytic Neural Learning Framework for Efficient and Calibrated Class-Incremental Learning'
+        authors:
+          - Alejandro Dopico-Castro
+          - Oscar Fontenla-Romero
+          - Bertha Guijarro-Berdiñas
+          - Amparo Alonso-Betanzos
+        summary: Closed-form class-incremental learning with calibrated analytic updates and lower energy cost.
+        doi: 10.48550/arXiv.2509.11285
+        url: https://arxiv.org/abs/2509.11285
+        journal: arXiv
+        date: 2025
+    skills:
+      - label: ML Frameworks
+        details: PyTorch, TensorFlow, Scikit-Learn, OpenCV, HuggingFace
+      - label: Programming
+        details: Python, SQL, C++, Shell
+      - label: Tools
+        details: Docker, Git, MLFlow, DVC, CI/CD
+      - label: Cloud
+        details: AWS (EC2, S3)
+      - label: Research Areas
+        details: Continual Learning, Federated Learning, Frugal AI, Edge AI, Computer Vision
+design:
+  theme: classic
+locale:
+  language: english
+settings:
+  current_date: '2026-09-21'
+  render_command:
+    design:
+    locale:
+    typst_path: rendercv_output/NAME_IN_SNAKE_CASE_CV.typ
+    pdf_path: rendercv_output/NAME_IN_SNAKE_CASE_CV.pdf
+    markdown_path: rendercv_output/NAME_IN_SNAKE_CASE_CV.md
+    html_path: rendercv_output/NAME_IN_SNAKE_CASE_CV.html
+    png_path: rendercv_output/NAME_IN_SNAKE_CASE_CV.png
+    dont_generate_markdown: true
+    dont_generate_html: true
+    dont_generate_typst: false
+    dont_generate_pdf: false
+    dont_generate_png: true
+  bold_keywords: []

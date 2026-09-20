@@ -20,6 +20,11 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# RenderCV intermediates (PDF is written to cv/cv.pdf)
+rendercv_output/
+cv/rendercv_output/
+.venv/
+
 # editor
 .vscode/*
 !.vscode/extensions.json
