@@ -30,6 +30,8 @@ export const SITE = {
 export const NAV_LINKS = [
   { label: 'Research', href: '/research' },
   { label: 'Projects', href: '/work' },
+  { label: 'CV', href: '/cv' },
+  { label: 'Teaching', href: '/teaching' },
   { label: 'Notes', href: '/notes' },
   { label: 'About', href: '/about' },
 ] as const;

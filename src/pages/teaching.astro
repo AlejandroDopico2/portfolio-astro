@@ -1,0 +1,58 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { teachingGroups, teachingIntro, supervisedTheses } from '@/data/teaching';
+---
+
+<BaseLayout
+  title="Teaching"
+  description="Teaching across undergraduate and graduate programmes at UDC and UIMP."
+>
+  <article class="mx-auto max-w-page px-6 pt-16 pb-24 sm:pt-24">
+    <p class="text-ink-soft mb-6 font-mono text-xs tracking-[0.2em] uppercase">Teaching</p>
+    <h1 class="text-ink max-w-xl text-3xl font-medium tracking-tight sm:text-4xl">Teaching</h1>
+    <p class="text-ink-soft mt-6 max-w-measure leading-relaxed">{teachingIntro}</p>
+
+    {
+      teachingGroups.map((group) => (
+        <section class="mt-16">
+          <h2 class="text-ink-soft font-mono text-[0.8125rem] tracking-[0.18em] uppercase">
+            {group.place}
+          </h2>
+          <div class="mt-6">
+            {group.courses.map((course) => (
+              <article class="border-line border-b py-6">
+                <h3 class="text-ink text-[1.05rem] font-medium tracking-tight">{course.title}</h3>
+                <p class="text-ink-soft mt-1 font-mono text-xs">
+                  {course.href ? (
+                    <a href={course.href} class="text-signal hover:underline">
+                      {course.context}
+                    </a>
+                  ) : (
+                    course.context
+                  )}
+                </p>
+                <p class="text-ink-soft mt-3 max-w-measure leading-relaxed">{course.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+
+    <section class="mt-16">
+      <h2 class="text-ink-soft font-mono text-[0.8125rem] tracking-[0.18em] uppercase">
+        Supervised Bachelor’s Thesis
+      </h2>
+      <div class="mt-6">
+        {
+          supervisedTheses.map((thesis) => (
+            <article class="border-line border-b py-6">
+              <h3 class="text-ink text-[1.05rem] font-medium tracking-tight">{thesis.title}</h3>
+              <p class="text-ink-soft mt-3 max-w-measure leading-relaxed">{thesis.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+  </article>
+</BaseLayout>
