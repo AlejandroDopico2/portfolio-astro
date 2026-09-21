@@ -6,8 +6,8 @@ export const SITE = {
   email: 'hello@dopico.dev',
   intro: "hey, i'm alejandro",
   lead: [
-    "I'm a computer engineer based in Galicia. I'm currently a PhD researcher in AI at LIDIA, University of A Coruña.",
-    "I work on AI and machine learning. I'm a hackathon lover, and I've been helping organize HackUDC with GPUL <3.",
+    "I'm a computer engineer based in Galicia. I'm currently an FPI-funded PhD researcher in AI at LIDIA, University of A Coruña.",
+    "I work on AI and machine learning, mostly on making it more efficient when resources are limited. I'm a hackathon lover, and I've been helping organize HackUDC with GPUL <3.",
   ],
   description:
     'Alejandro Dopico is a computer engineer from Galicia and a PhD researcher in AI at LIDIA, University of A Coruña.',

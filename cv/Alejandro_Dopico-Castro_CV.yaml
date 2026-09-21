@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.6/schema.json
 cv:
   name: Alejandro Dopico-Castro
-  headline: PhD Researcher in Frugal AI | Continuous & Federated Learning
+  headline: PhD Researcher in Frugal AI | Continual & Federated Learning
   location: A Coruña, Spain
   email: hello@dopico.dev
   photo:
@@ -21,7 +21,7 @@ cv:
         date:
         start_date: 2025-03
         end_date: present
-        summary: 'Funded PhD on Frugal and Sustainable AI (continual, federated, few-shot learning).'
+        summary: 'Funded PhD (FPI predoctoral contract, Spanish Ministry of Science) on Frugal and Sustainable AI (continual, federated, few-shot learning).'
       - institution: University of A Coruña (MIA-UDC)
         area: Artificial Intelligence
         degree: MSc
@@ -38,7 +38,7 @@ cv:
           - 'Thesis: Object detection for sports images'
     experience:
       - company: LIDIA Group, University of A Coruña
-        position: PhD Researcher
+        position: PhD Researcher (FPI)
         date:
         start_date: 2025-03
         end_date: present
