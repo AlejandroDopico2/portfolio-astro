@@ -10,7 +10,7 @@ interface Props {
 
 const { entry, reverse = false, priority = false } = Astro.props;
 const { title, subtitle, description, year, category, event, award, heroImage } = entry.data;
-const meta = subtitle ?? [year, event, award].filter(Boolean).join(' · ');
+const meta = subtitle ?? [year, event, award].filter(Boolean).join(', ');
 const tags = [category, event, String(year)].filter(
   (tag): tag is string => typeof tag === 'string' && tag.length > 0 && !meta.includes(tag),
 );

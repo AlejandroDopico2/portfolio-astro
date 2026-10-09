@@ -28,8 +28,7 @@ const typeLabels: Record<(typeof typeOrder)[number], string> = {
   description={`Publications and preprints by ${SITE.name}.`}
 >
   <section class="mx-auto max-w-page px-6 pt-16 pb-24 sm:pt-24">
-    <p class="text-ink-soft mb-6 font-mono text-xs tracking-[0.2em] uppercase">Research</p>
-    <h1 class="text-ink max-w-xl text-3xl font-medium tracking-tight sm:text-4xl">Publications</h1>
+    <h1 class="font-display text-ink max-w-xl text-3xl font-normal tracking-tight sm:text-4xl">Publications</h1>
     <p class="text-ink-soft mt-6 max-w-measure leading-relaxed">
       Papers and preprints. Abstracts expand in place.
     </p>
@@ -61,7 +60,7 @@ const typeLabels: Record<(typeof typeOrder)[number], string> = {
       {
         years.map((year) => (
           <section class="mb-6" data-year-group>
-            <h2 class="text-ink-soft font-mono text-[0.8125rem] tracking-[0.18em] uppercase">
+            <h2 class="font-display text-ink text-[1.15rem] font-medium tracking-tight">
               {year}
             </h2>
             <div>

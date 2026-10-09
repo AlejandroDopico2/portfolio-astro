@@ -1,6 +1,6 @@
 ---
 title: Battery SoC Estimator
-subtitle: Huawei TechArena 2024 · 2nd place
+subtitle: Huawei TechArena 2024, 2nd place
 description: A two-stage approach to estimate battery State of Charge in real time.
 year: 2024
 category: Hackathon

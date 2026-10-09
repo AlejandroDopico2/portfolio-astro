@@ -34,8 +34,7 @@ const awards: {
 
 <BaseLayout title="CV" description={`Curriculum vitae of ${cv.name}.`}>
   <article class="mx-auto max-w-page px-6 pt-16 pb-24 sm:pt-24">
-    <p class="text-ink-soft mb-6 font-mono text-xs tracking-[0.2em] uppercase">CV</p>
-    <h1 class="text-ink max-w-xl text-3xl font-medium tracking-tight sm:text-4xl">Curriculum Vitae</h1>
+    <h1 class="font-display text-ink max-w-xl text-3xl font-normal tracking-tight sm:text-4xl">Curriculum Vitae</h1>
     <p class="text-ink-soft mt-6 max-w-measure leading-relaxed">
       {cv.headline}
       {cv.location && ` Based in ${cv.location}.`}
@@ -45,7 +44,7 @@ const awards: {
     </a>
 
     <section class="mt-16 sm:mt-20">
-      <h2 class="text-ink-soft font-mono text-[0.8125rem] tracking-[0.18em] uppercase">Experience</h2>
+      <h2 class="font-display text-ink text-[1.15rem] font-medium tracking-tight">Experience</h2>
       <div class="mt-6">
         {
           cv.experience.map((entry) => (
@@ -75,7 +74,7 @@ const awards: {
     </section>
 
     <section class="mt-16">
-      <h2 class="text-ink-soft font-mono text-[0.8125rem] tracking-[0.18em] uppercase">Education</h2>
+      <h2 class="font-display text-ink text-[1.15rem] font-medium tracking-tight">Education</h2>
       <div class="mt-6">
         {
           cv.education.map((entry) => (
@@ -93,7 +92,7 @@ const awards: {
     </section>
 
     <section class="mt-16">
-      <h2 class="text-ink-soft font-mono text-[0.8125rem] tracking-[0.18em] uppercase">Publications</h2>
+      <h2 class="font-display text-ink text-[1.15rem] font-medium tracking-tight">Publications</h2>
       <div class="mt-6">
         {
           cv.publications.map((paper) => (
@@ -117,7 +116,7 @@ const awards: {
     </section>
 
     <section class="mt-16">
-      <h2 class="text-ink-soft font-mono text-[0.8125rem] tracking-[0.18em] uppercase">Teaching</h2>
+      <h2 class="font-display text-ink text-[1.15rem] font-medium tracking-tight">Teaching</h2>
       <p class="text-ink-soft mt-6 max-w-measure leading-relaxed">
         Undergraduate and Master’s courses at UDC and UIMP, plus supervised thesis work.
       </p>
@@ -129,7 +128,7 @@ const awards: {
     {
       awards.length > 0 && (
         <section class="mt-16">
-          <h2 class="text-ink-soft font-mono text-[0.8125rem] tracking-[0.18em] uppercase">
+          <h2 class="font-display text-ink text-[1.15rem] font-medium tracking-tight">
             Awards
           </h2>
           <div class="mt-6">
@@ -166,7 +165,7 @@ const awards: {
     }
 
     <section class="mt-16">
-      <h2 class="text-ink-soft font-mono text-[0.8125rem] tracking-[0.18em] uppercase">Skills</h2>
+      <h2 class="font-display text-ink text-[1.15rem] font-medium tracking-tight">Skills</h2>
       <div class="mt-6 max-w-measure">
         {
           cv.skills.map((skill) => (

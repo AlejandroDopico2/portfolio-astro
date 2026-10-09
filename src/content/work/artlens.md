@@ -1,6 +1,6 @@
 ---
 title: ArtLens
-subtitle: HackUDC 2025 - Best Mobile App
+subtitle: HackUDC 2025, Best Mobile App
 description: A museum companion built during a 36-hour hackathon, combining visual retrieval and a local LLM to identify artworks and adapt their explanations to different visitors.
 year: 2025
 category: Hackathon

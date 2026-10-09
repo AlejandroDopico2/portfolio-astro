@@ -8,19 +8,19 @@ interface Props {
 const { entry } = Astro.props;
 const { title, subtitle, year, event, award, category } = entry.data;
 
-const line = subtitle ?? [event, award].filter(Boolean).join(' · ');
+const line = subtitle ?? [event, award].filter(Boolean).join(', ');
 const aside = category && !line.toLowerCase().includes(category.toLowerCase()) ? category : '';
 ---
 
 <a
   href={`/work/${entry.id}`}
-  class="group border-line grid grid-cols-[3.5rem_1fr_auto] items-center gap-4 border-b py-7 sm:grid-cols-[4.75rem_1fr_auto] sm:gap-7"
+  class="group border-line grid grid-cols-[3.5rem_1fr_auto] items-center gap-4 border-b py-5 sm:grid-cols-[4.75rem_1fr_auto] sm:gap-7"
 >
   <span class="text-ink-soft font-mono text-xs">{year}</span>
 
   <span class="min-w-0">
     <span
-      class="text-ink group-hover:text-signal block truncate text-[1.15rem] font-medium tracking-tight transition-colors"
+      class="font-display text-ink group-hover:text-signal block truncate text-[1.15rem] font-medium tracking-tight transition-colors"
     >
       {title}
     </span>
@@ -28,10 +28,10 @@ const aside = category && !line.toLowerCase().includes(category.toLowerCase()) ?
   </span>
 
   <span class="flex items-center gap-4">
-    <span class="text-ink-soft hidden font-mono text-[11px] md:block">
+    <span class="text-ink-soft hidden text-sm md:block">
       {aside}
     </span>
-    <span aria-hidden="true" class="text-ink-soft group-hover:text-signal transition-colors">
+    <span aria-hidden="true" class="text-ink-soft group-hover:text-signal inline-block transition-[color,transform] duration-300 group-hover:translate-x-1.5">
       →
     </span>
   </span>
