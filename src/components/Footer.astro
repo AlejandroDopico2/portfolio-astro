@@ -1,24 +1,49 @@
 ---
+import { execSync } from 'node:child_process';
 import { SITE } from '@/site.config';
+import { formatDate } from '@/utils/formatDate';
 
 const year = new Date().getFullYear();
+
+// Last commit at build time. Falls back to nothing if git isn't available.
+let commit: { hash: string; date: string } | undefined;
+try {
+  const [hash, iso] = execSync('git log -1 --format=%h%n%cI', { encoding: 'utf8' }).trim().split('\n');
+  commit = { hash, date: formatDate(new Date(iso), 'medium') };
+} catch {}
 ---
 
 <footer class="border-line border-t">
   <div
-    class="text-ink-soft mx-auto flex max-w-page flex-col gap-4 px-6 py-12 font-mono text-xs sm:flex-row sm:items-center sm:justify-between"
+    class="text-ink-soft mx-auto flex max-w-page flex-col gap-4 px-6 py-12 text-sm sm:flex-row sm:items-center sm:justify-between"
   >
-    <p>© {year} {SITE.name}</p>
+    <p>
+      © {year} {SITE.name}
+      {
+        commit && (
+          <span class="block pt-1 font-mono text-xs sm:inline sm:pt-0 sm:pl-3">
+            Last commit{' '}
+            <a
+              href={`https://github.com/AlejandroDopico2/portfolio-astro/commit/${commit.hash}`}
+              class="link-anim hover:text-signal transition-colors"
+            >
+              {commit.hash}
+            </a>{' '}
+            on {commit.date}
+          </span>
+        )
+      }
+    </p>
 
-    <nav class="flex items-center gap-4" aria-label="Social">
+    <nav class="flex flex-wrap items-center gap-x-4 gap-y-2" aria-label="Social">
       {
         SITE.social.map((link) => (
-          <a href={link.href} class="hover:text-signal transition-colors" rel="me">
+          <a href={link.href} class="link-anim hover:text-signal transition-colors" rel="me">
             {link.label}
           </a>
         ))
       }
-      <a href="#top" class="hover:text-signal transition-colors"> Top ↑ </a>
+      <a href="#top" class="link-anim hover:text-signal transition-colors">Top ↑</a>
     </nav>
   </div>
 </footer>
