@@ -70,6 +70,7 @@ const socialImageAlt = `${SITE.name}, ${SITE.role}`;
 {/* Fonts API (Astro 5.x+)*/}
 <Font cssVariable="--ff-body" preload />
 <Font cssVariable="--ff-mono" />
+<Font cssVariable="--ff-display" preload />
 
 {/* Theme Toggle Script */}
 <script is:inline>
@@ -81,11 +82,14 @@ const socialImageAlt = `${SITE.name}, ${SITE.role}`;
     const theme =
         stored ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     document.documentElement.classList.toggle('dark', theme === 'dark');
+    // Lets CSS hide things that JS will animate in (e.g. <mark> sweeps).
+    document.documentElement.classList.add('js');
     })();
     document.addEventListener('astro:after-swap', () => {
         const stored = localStorage.getItem('theme');
         const theme = stored ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.classList.toggle('dark', theme === 'dark');
+        document.documentElement.classList.add('js');
     });
 </script>
 

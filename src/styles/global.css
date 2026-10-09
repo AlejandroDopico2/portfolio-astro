@@ -16,7 +16,7 @@
   --paper: #fbfaf7; /* page background */
   --ink: #1a1c1f; /* primary text */
   --ink-soft: #5a5f68; /* secondary text */
-  --signal: #1e3a5f; /* restrained navy accent */
+  --signal: #2f4fd1; /* cobalt accent — swap this one value to re-color */
   --line: #ebe8e1; /* borders, rules */
   --surface: #f3f1ec; /* cards, raised panels */
 }
@@ -24,12 +24,12 @@
 .dark {
   color-scheme: dark;
 
-  --paper: #16181c;
-  --ink: #f7f6f2;
-  --ink-soft: #a3a8b0;
-  --signal: #9aafc8;
-  --line: #2c2f36;
-  --surface: #1e2126;
+  --paper: #171615;
+  --ink: #f4f1eb;
+  --ink-soft: #a9a49c;
+  --signal: #8ea2e8;
+  --line: #2c2a27;
+  --surface: #1f1e1c;
 }
 
 /* `inline` keeps these resolving against the live --paper/--ink/etc custom
@@ -43,9 +43,9 @@
   --color-line: var(--line);
   --color-surface: var(--surface);
 
-  /* One sans family for display and body; mono is reserved for
-     small editorial labels. See astro.config.mjs. */
-  --font-display: var(--ff-body);
+  /* Newsreader for headings, Plex Sans for body, Plex Mono only for data
+     (dates, years, email). See astro.config.mjs. */
+  --font-display: var(--ff-display);
   --font-body: var(--ff-body);
   --font-mono: var(--ff-mono);
 
@@ -114,4 +114,77 @@
 .prose :where(a) {
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
+}
+
+/* Underline that grows from the left on hover. Uses currentColor, so it
+   follows whatever text color the link already has. */
+.link-anim {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 2px;
+}
+.link-anim:hover,
+.link-anim:focus-visible,
+.link-anim[aria-current='page'] {
+  background-size: 100% 1px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .link-anim {
+    transition:
+      background-size 300ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      color 200ms ease;
+  }
+}
+
+
+/* Highlighter for a few key phrases (homepage lead, About). --mark-end is
+   registered so it can be animated; BaseLayout's script sweeps each phrase
+   in as it scrolls into view, one after another. */
+@property --mark-end {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 100%;
+}
+@property --mark-alpha {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 24%;
+}
+mark {
+  --mark: color-mix(in srgb, var(--color-signal) var(--mark-alpha), transparent);
+  color: var(--color-ink);
+  background-color: transparent;
+  background-image: linear-gradient(
+    to right,
+    var(--mark) var(--mark-end),
+    transparent var(--mark-end)
+  );
+  background-repeat: no-repeat;
+  background-position: 0 50%;
+  background-size: 100% 92%;
+  border-radius: 0.15em;
+  padding: 0 0.15em;
+  margin: 0 -0.08em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js mark {
+    --mark-end: 0%;
+    --mark-alpha: 0%;
+  }
+  .js mark.swept {
+    animation: mark-sweep var(--mark-dur, 900ms) cubic-bezier(0.5, 0, 0.3, 1) var(--mark-delay, 0ms) forwards;
+  }
+}
+@keyframes mark-sweep {
+  8% {
+    --mark-alpha: 24%;
+  }
+  to {
+    --mark-end: 100%;
+    --mark-alpha: 24%;
+  }
 }

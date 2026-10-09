@@ -25,5 +25,37 @@ const { title, description = SITE.description, image = '/og.png' } = Astro.props
       <slot />
     </main>
     <Footer />
+
+    <script>
+      // Sweep <mark> highlights in as they scroll into view, in reading order:
+      // one "pen" that finishes a phrase before starting the next. Duration
+      // scales with phrase length, like a real marker stroke.
+      function initMarks() {
+        const marks = [...document.querySelectorAll<HTMLElement>('main mark')];
+        if (!marks.length) return;
+        let penFreeAt = performance.now() + 400;
+        const io = new IntersectionObserver(
+          (entries) => {
+            const visible = entries
+              .filter((e) => e.isIntersecting)
+              .map((e) => e.target as HTMLElement)
+              .sort((a, b) => marks.indexOf(a) - marks.indexOf(b));
+            for (const mark of visible) {
+              io.unobserve(mark);
+              const now = performance.now();
+              const start = Math.max(now, penFreeAt);
+              const ms = 350 + mark.textContent!.length * 28;
+              mark.style.setProperty('--mark-delay', `${start - now}ms`);
+              mark.style.setProperty('--mark-dur', `${ms}ms`);
+              mark.classList.add('swept');
+              penFreeAt = start + ms + 150;
+            }
+          },
+          { threshold: 0.6, rootMargin: '0px 0px -10% 0px' },
+        );
+        marks.forEach((m) => io.observe(m));
+      }
+      document.addEventListener('astro:page-load', initMarks);
+    </script>
   </body>
 </html>
