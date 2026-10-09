@@ -5,10 +5,19 @@ export const SITE = {
   role: 'Computer engineer and PhD researcher in AI',
   email: 'hello@dopico.dev',
   intro: "hey, i'm alejandro",
+  // Rendered as HTML: <mark> highlights a phrase. Keep it to a few.
   lead: [
-    "I'm a computer engineer based in Galicia. I'm currently an FPI-funded PhD researcher in AI at LIDIA, University of A Coruña.",
-    "I work on AI and machine learning, mostly on making it more efficient when resources are limited. I'm a hackathon lover, and I've been helping organize HackUDC with GPUL <3.",
+    "I'm a computer engineer based in <mark>Galicia</mark>. I'm currently an FPI-funded <mark>PhD researcher in AI</mark> at LIDIA, University of A Coruña.",
+    "I work on AI and machine learning, mostly on <mark>making it more efficient when resources are limited</mark>. I'm a hackathon lover, and I've been helping organize <mark>HackUDC</mark> with GPUL &lt;3.",
   ],
+  // Small "lately" line on the homepage. Keep it short; edit whenever it changes.
+  now: [
+    'Organizing HackUDC 2027',
+    'Class-incremental learning',
+    'Teaching',
+    'Starting to supervise theses on synthetic medical data and machine unlearning',
+  ],
+  photoCaption: 'HackUDC 2026 closing ceremony, presenting someone. Probably speaking too fast.',
   description:
     'Alejandro Dopico is a computer engineer from Galicia and a PhD researcher in AI at LIDIA, University of A Coruña.',
   status: 'PhD researcher in AI · LIDIA, University of A Coruña',
@@ -22,6 +31,8 @@ export const SITE = {
   social: [
     { label: 'GitHub', href: 'https://github.com/AlejandroDopico2' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/alejandrodopicocastro' },
+    { label: 'Scholar', href: 'https://scholar.google.com/citations?user=zFZ6LycAAAAJ' },
+    { label: 'ORCID', href: 'https://orcid.org/0009-0005-0592-5760' },
     { label: 'X', href: 'https://x.com/alexdopico_' },
   ],
   locale: 'en',
