@@ -4,9 +4,11 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 
 <BaseLayout title="Page not found">
   <section class="mx-auto flex max-w-page flex-col items-start gap-4 px-6 py-32">
-    <p class="text-ink-soft font-mono text-xs tracking-[0.2em] uppercase">404</p>
-    <h1 class="font-display text-ink text-3xl font-medium">This page doesn't exist.</h1>
-    <p class="text-ink-soft">The link might be broken, or the page may have moved.</p>
-    <a href="/" class="text-signal font-mono text-sm hover:underline">← Back home</a>
+    <p class="text-ink-soft font-mono text-sm">404</p>
+    <h1 class="font-display text-ink text-3xl font-normal tracking-tight">This page got forgotten.</h1>
+    <p class="text-ink-soft max-w-measure">
+      Neural networks do that too when you teach them something new. Either way, there's nothing here.
+    </p>
+    <a href="/" class="link-anim text-signal mt-2">← Back home</a>
   </section>
 </BaseLayout>
