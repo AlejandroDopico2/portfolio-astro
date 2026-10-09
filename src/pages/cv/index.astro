@@ -52,7 +52,7 @@ const awards: {
               <div>
                 <h3
                   class:list={[
-                    'text-[1.15rem] font-medium tracking-tight',
+                    'text-[1.05rem] font-medium tracking-tight',
                     entry.current ? 'text-signal' : 'text-ink',
                   ]}
                 >
@@ -63,7 +63,7 @@ const awards: {
                   {entry.location && `, ${entry.location}`}
                 </p>
                 {entry.description && (
-                  <p class="text-ink-soft mt-3 max-w-measure leading-relaxed">{entry.description}</p>
+                  <p class="text-ink-soft mt-3 max-w-measure text-base leading-relaxed">{entry.description}</p>
                 )}
               </div>
             </article>
@@ -82,7 +82,7 @@ const awards: {
               <div>
                 <h3 class="text-ink text-[1.05rem] font-medium tracking-tight">{entry.title}</h3>
                 <p class="text-ink-soft mt-1 text-sm">{entry.place}</p>
-                {entry.note && <p class="text-ink-soft mt-2 max-w-measure text-sm leading-relaxed">{entry.note}</p>}
+                {entry.note && <p class="text-ink-soft mt-2 max-w-measure text-base leading-relaxed">{entry.note}</p>}
               </div>
             </article>
           ))
@@ -152,7 +152,7 @@ const awards: {
                     <h3 class="text-ink text-[1.05rem] font-medium tracking-tight">{entry.title}</h3>
                     {entry.place && <p class="text-ink-soft mt-1 text-sm">{entry.place}</p>}
                     {entry.description && (
-                      <p class="text-ink-soft mt-2 max-w-measure text-sm leading-relaxed">{entry.description}</p>
+                      <p class="text-ink-soft mt-2 max-w-measure text-base leading-relaxed">{entry.description}</p>
                     )}
                   </div>
                 </article>
@@ -170,7 +170,7 @@ const awards: {
           cv.skills.map((skill) => (
             <p class="border-line border-b py-5">
               <span class="text-ink font-medium">{skill.label}</span>
-              <span class="text-ink-soft mt-1 block leading-relaxed">{skill.details}</span>
+              <span class="text-ink-soft mt-1 block text-base leading-relaxed">{skill.details}</span>
             </p>
           ))
         }

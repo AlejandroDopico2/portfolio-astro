@@ -30,7 +30,7 @@ import { teachingGroups, teachingIntro, supervisedTheses } from '@/data/teaching
                     course.context
                   )}
                 </p>
-                <p class="text-ink-soft mt-3 max-w-measure leading-relaxed">{course.description}</p>
+                <p class="text-ink-soft mt-3 max-w-measure text-base leading-relaxed">{course.description}</p>
               </article>
             ))}
           </div>
@@ -47,7 +47,7 @@ import { teachingGroups, teachingIntro, supervisedTheses } from '@/data/teaching
           supervisedTheses.map((thesis) => (
             <article class="border-line border-b py-6">
               <h3 class="text-ink text-[1.05rem] font-medium tracking-tight">{thesis.title}</h3>
-              <p class="text-ink-soft mt-3 max-w-measure leading-relaxed">{thesis.description}</p>
+              <p class="text-ink-soft mt-3 max-w-measure text-base leading-relaxed">{thesis.description}</p>
             </article>
           ))
         }
