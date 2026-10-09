@@ -3,39 +3,64 @@ import ThemeToggle from '@/components/ThemeToggle.astro';
 import { SITE, NAV_LINKS } from '@/site.config';
 
 const currentPath = Astro.url.pathname;
+const links = [...NAV_LINKS, { label: 'Contact', href: '/#contact' }];
+const isActive = (href: string) => currentPath === href || currentPath.startsWith(`${href}/`);
 ---
 
 <header class="border-line bg-paper sticky top-0 z-40 border-b">
   <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-6 py-5">
-    <a href="/" class="text-ink text-[1.05rem] font-medium tracking-tight">
+    <a href="/" class="font-display text-ink shrink-0 text-[1.25rem] font-medium tracking-tight">
       {SITE.name}
     </a>
 
-    <nav class="flex items-center gap-6" aria-label="Primary">
-      {
-        NAV_LINKS.map((link) => {
-          const isActive = currentPath === link.href || currentPath.startsWith(`${link.href}/`);
-          return (
+    <div class="flex items-center gap-6">
+      <nav class="hidden items-center gap-6 md:flex" aria-label="Primary">
+        {
+          links.map((link) => (
             <a
               href={link.href}
-              aria-current={isActive ? 'page' : undefined}
+              aria-current={isActive(link.href) ? 'page' : undefined}
               class:list={[
-                'font-mono text-xs tracking-wide uppercase transition-colors',
-                isActive ? 'text-signal' : 'text-ink-soft hover:text-ink',
+                'link-anim text-[0.95rem] transition-colors',
+                isActive(link.href) ? 'text-signal' : 'text-ink-soft hover:text-ink',
               ]}
             >
               {link.label}
             </a>
-          );
-        })
-      }
-      <a
-        href="/#contact"
-        class="text-ink-soft hover:text-ink hidden font-mono text-xs tracking-wide uppercase transition-colors sm:inline"
-      >
-        Contact
-      </a>
+          ))
+        }
+      </nav>
+
       <ThemeToggle />
-    </nav>
+
+      <!-- Mobile menu: native <details>, no JS. Resets on navigation because the header re-renders. -->
+      <details class="group md:hidden">
+        <summary
+          class="text-ink-soft hover:text-ink border-line flex h-8 cursor-pointer list-none items-center rounded-sm border px-2.5 text-sm [&::-webkit-details-marker]:hidden"
+        >
+          <span class="group-open:hidden">Menu</span>
+          <span class="hidden group-open:inline">Close</span>
+        </summary>
+        <nav
+          class="border-line bg-paper absolute inset-x-0 top-full flex flex-col border-b px-6 py-2"
+          aria-label="Primary"
+        >
+          {
+            links.map((link) => (
+              <a
+                href={link.href}
+                aria-current={isActive(link.href) ? 'page' : undefined}
+                class:list={[
+                  'border-line border-b py-3.5 text-base last:border-b-0',
+                  isActive(link.href) ? 'text-signal' : 'text-ink-soft hover:text-ink',
+                ]}
+              >
+                {link.label}
+              </a>
+            ))
+          }
+        </nav>
+      </details>
+    </div>
   </div>
 </header>
