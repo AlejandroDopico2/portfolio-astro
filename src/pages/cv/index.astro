@@ -36,8 +36,7 @@ const awards: {
   <article class="mx-auto max-w-page px-6 pt-16 pb-24 sm:pt-24">
     <h1 class="font-display text-ink max-w-xl text-3xl font-normal tracking-tight sm:text-4xl">Curriculum Vitae</h1>
     <p class="text-ink-soft mt-6 max-w-measure leading-relaxed">
-      {cv.headline}
-      {cv.location && ` Based in ${cv.location}.`}
+      {cv.headline}{cv.location && `. Based in ${cv.location}.`}
     </p>
     <a href="/cv/cv.pdf" class="text-signal mt-8 inline-block font-mono text-sm hover:underline">
       Download CV
@@ -61,7 +60,7 @@ const awards: {
                 </h3>
                 <p class="text-ink-soft mt-1 text-sm">
                   {entry.place}
-                  {entry.location && ` · ${entry.location}`}
+                  {entry.location && `, ${entry.location}`}
                 </p>
                 {entry.description && (
                   <p class="text-ink-soft mt-3 max-w-measure leading-relaxed">{entry.description}</p>
@@ -104,7 +103,7 @@ const awards: {
                 {paper.title}
               </p>
               <p class="text-ink-soft mt-2 font-mono text-xs">
-                {[paper.venue, paper.year].filter(Boolean).join(' · ')}
+                {[paper.venue, paper.year].filter(Boolean).join(' ')}
               </p>
             </a>
           ))
